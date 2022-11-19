@@ -21,12 +21,13 @@ function unstringifyBigInts(o) {
 }
 
 export async function exportCallDataGroth16(input, wasmPath, zkeyPath) {
+  console.log("zkprooftest");
   const { proof, publicSignals } = await groth16.fullProve(
     input,
     wasmPath,
     zkeyPath
   );
-
+  console.log("zkprooftest1");
   const editedPublicSignals = unstringifyBigInts(publicSignals);
   const editedProof = unstringifyBigInts(proof);
   const calldata = await groth16.exportSolidityCallData(

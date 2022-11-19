@@ -11,11 +11,10 @@ export async function sudokuCalldata(unsolved, solved) {
   try {
     dataResult = await exportCallDataGroth16(
       input,
-      "/zkproof/sudoku/sudoku.wasm",
+      "/zkproof/sudoku/main.wasm",
       "/zkproof/sudoku/sudoku_0001.zkey"
     );
   } catch (error) {
-    // console.log(error);
     window.alert("Wrong answer");
   }
 

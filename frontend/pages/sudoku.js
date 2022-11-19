@@ -83,13 +83,13 @@ export default function Sudoku() {
     console.log("sudokuInitial", sudokuInitial);
     console.log("sudoku", sudoku);
     let calldata = await sudokuCalldata(sudokuInitial, sudoku);
-
+    console.log("calldata", calldata);
     if (!calldata) {
       setLoadingVerifyBtn(false);
       return "Invalid inputs to generate witness.";
     }
 
-    // console.log("calldata", calldata);
+     console.log("calldata", calldata);
 
     try {
       let result;
@@ -97,24 +97,29 @@ export default function Sudoku() {
         accountQuery.data?.address &&
         data.chain.id.toString() === networks.selectedChain
       ) {
+        console.log("test");
         result = await contract.verifySudoku(
           calldata[0],
           calldata[1],
           calldata[2],
           calldata[3]
         );
+        console.log("test1");
       } else {
+        console.log("test2");
         result = await contractNoSigner.verifySudoku(
           calldata[0],
           calldata[1],
           calldata[2],
           calldata[3]
         );
+        console.log("test3");
       }
       console.log("result", result);
       setLoadingVerifyBtn(false);
       alert("Successfully verified");
     } catch (error) {
+      console.log(error);
       setLoadingVerifyBtn(false);
       alert("Wrong solution");
     }
@@ -136,7 +141,7 @@ export default function Sudoku() {
       return "Invalid inputs to generate witness.";
     }
 
-    // console.log("calldata", calldata);
+    console.log("calldata", calldata);
 
     try {
       let txn = await contract.verifySudokuAndMintNft(
